@@ -2,3 +2,5 @@
 
 TODO: write a python script that first prints "hello world!"
 """
+
+print("hello world!")
