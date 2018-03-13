@@ -7,7 +7,13 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    pass
+    # deliberate way
+    # if a_number % 2 != 0:
+    #     return True
+    # else:
+    #     return False
+    # one liner
+    return bool(a_number % 2)
 
 
 def fix_it(moves=True, should_move=True):
@@ -21,7 +27,16 @@ def fix_it(moves=True, should_move=True):
     "Duct Tape"
     "No Problem"
     """
-    pass
+    if moves:
+        if should_move:
+            return "No Problem"
+        else:
+            return "Duct Tape"
+    elif not (moves):
+        if should_move:
+            return "WD-40"
+        else:
+            return "No Problem"
 
 
 def loops_1a():
@@ -31,7 +46,10 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    pass
+    stars = []
+    for _ in range(10):
+        stars.append('*')
+    return stars
 
 
 
@@ -43,7 +61,10 @@ def loops_1c(number_of_items=5, symbol="#"):
     a string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    pass
+    items = []
+    for _ in range(number_of_items):
+        items.append(symbol)
+    return items
 
 
 def loops_2():
@@ -64,7 +85,13 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    pass
+    square = []
+    for i in range(10):
+        stars = []
+        for j in range(10):
+            stars.append('*')
+        square.append(stars)
+    return square
 
 
 def loops_3():
@@ -88,7 +115,13 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    pass
+    square = []
+    for i in range(10):
+        stars = []
+        for j in range(10):
+            stars.append(str(i))
+        square.append(stars)
+    return square
 
 
 def loops_4():
@@ -108,7 +141,13 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    pass
+    square = []
+    for i in range(10):
+        stars = []
+        for j in range(10):
+            stars.append(str(j))
+        square.append(stars)
+    return square
 
 
 def loops_5():
@@ -133,7 +172,16 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    pass
+    square = []
+    for i in range(10):
+        stars = []
+        for j in range(5):
+            coords_i = 'i' + str(i)
+            coords_j = 'j' + str(j)
+            coords = '(' + coords_i + ', ' + coords_j + ')'
+            stars.append(coords)
+        square.append(stars)
+    return square
 
 
 def loops_6():
@@ -156,7 +204,14 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    pass
+    pyramid = []
+    for row in range(10):
+        block = []
+        for i in range(row + 1):
+            block.append(str(i))
+        pyramid.append(block)
+
+    return pyramid
 
 
 def loops_7():
@@ -180,7 +235,19 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    pass
+    pyramid = []
+    height = 5
+    width = 9
+    for i in range(height):
+        row = ["*"] * width
+        left_bound = int((width - 1) / 2 - i)
+        right_bound = int((width + 1) / 2 + i)
+        for j in range(left_bound):
+            row[j] = " "
+        for j in range(right_bound, width):
+            row[j] = " "
+        pyramid.append(row)
+    return pyramid
 
 
 def lp(some_kind_of_list, exercise_name):
