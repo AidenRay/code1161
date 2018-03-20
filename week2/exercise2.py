@@ -25,4 +25,4 @@ def week2exersise2():
 
 
 if __name__ == "__main__":
-    prin(week2exersise2())
+    print(week2exersise2())

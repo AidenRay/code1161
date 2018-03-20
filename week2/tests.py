@@ -24,7 +24,7 @@ WEEK_NUMBER = 2
 def ex2runs(path):
     """Test w2 ex2 to check it works."""
     try:
-        from week2 import exercise2
+        import exercise2
         return exercise2.week2exersise2() == "MC Hammer"
     except Exception as e:
         print("\nThere is a syntax error", str(e))
