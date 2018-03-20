@@ -17,7 +17,6 @@ def loop_ranger(start, stop=None, step=1):
         return_list.append(start)
         start += step
     return return_list
-
 def lone_ranger(start, stop, step):
     """Duplicate the functionality of range.
 
