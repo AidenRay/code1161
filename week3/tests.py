@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 """Run the tests.
-
 This file tests your code. It'll check that the work in each
 of the exercise files does what it's supposed to.
 """
@@ -18,7 +17,7 @@ from codeHelpers import ex_runs
 from codeHelpers import nyan_cat
 from codeHelpers import syntax_error_message
 from codeHelpers import test
-from codeHelpers import Timeout
+# from codeHelpers import Timeout
 
 WEEK_NUMBER = 3
 
@@ -50,9 +49,9 @@ def test_not_number_rejector(path):
 
     mockInputs = ["aword", [1, 2, 3], {"an": "object"}, 40]
     try:
-        with Timeout(3):
-            with mock.patch('builtins.input', side_effect=mockInputs):
-                return exercise1.not_number_rejector("Testing some values:")
+        # with Timeout(3):
+        with mock.patch('builtins.input', side_effect=mockInputs):
+            return exercise1.not_number_rejector("Testing some values:")
     except Exception as e:
         print("exception:", e)
 
@@ -69,16 +68,15 @@ def test_super_asker(path, low, high):
     neat_range = list(range(low - 25, high + 20, 5))
     mockInputs = dirty_things + neat_range
     try:
-        with Timeout(3):
-            with mock.patch('builtins.input', side_effect=mockInputs):
-                return exercise1.super_asker(low, high)
+        # with Timeout(3):
+        with mock.patch('builtins.input', side_effect=mockInputs):
+            return exercise1.super_asker(low, high)
     except Exception as e:
         print("exception:", e)
 
 
 def test_example_guessingGame(path):
     """Test the example_guessingGame function.
-
     This should always pass becasue it's provided code
     """
     try:
@@ -90,9 +88,9 @@ def test_example_guessingGame(path):
     guesses = list(range(5+1))
     mockInputs = [upperBound] + guesses
     try:
-        with Timeout(3):
-            with mock.patch('builtins.input', side_effect=mockInputs):
-                return exercise2.exampleGuessingGame() == "You got it!"
+        # with Timeout(3):
+        with mock.patch('builtins.input', side_effect=mockInputs):
+            return exercise2.exampleGuessingGame() == "You got it!"
     except Exception as e:
         print("exception:", e)
 
@@ -106,16 +104,15 @@ def test_advanced_guessingGame(path, mockInputs):
         return syntax_error_message(3, e)
 
     try:
-        with Timeout(3):
-            with mock.patch('builtins.input', side_effect=mockInputs):
-                return exercise3.advancedGuessingGame() == "You got it!"
+        # with Timeout(3):
+        with mock.patch('builtins.input', side_effect=mockInputs):
+            return exercise3.advancedGuessingGame() == "You got it!"
     except Exception as e:
         print("exception:", e)
 
 
 def test_binary_search(path, low, high, actual):
     """Test the binary search function.
-
     checks to see that it's searching better than O(log n)
     """
     try:
@@ -123,10 +120,10 @@ def test_binary_search(path, low, high, actual):
         exercise4 = imp.load_source("exercise4", path)
         BASE2 = 2
         b = None
-        with Timeout(3):
-            b = exercise4.binary_search(low, high, actual)
-            b["WorstCaseO"] = math.log(high - low, BASE2)
-            print("b", b)
+        # with Timeout(3):
+        b = exercise4.binary_search(low, high, actual)
+        b["WorstCaseO"] = math.log(high - low, BASE2)
+        print("b", b)
         if b is not None:
             print("snuck it in")
             return b["tries"] < b["WorstCaseO"]
@@ -169,7 +166,6 @@ E.g. if your range is 16, then the worst case is 4 guesses: 2×2×2×2 = 16
 Think back to when you were playing the game with your brain, sometimes
 you'd go over the worst case because you aren't a perfect arithmatic
 machine but the computer is, so it's always below that worst case limit.
-
             Close the histogram to finish running the tests.""")
     plt.show()
 
@@ -295,7 +291,6 @@ def theTests(path_to_code_to_check="."):
         path = "exercise4.py"
         imp.load_source("exercise4", path)
 
-
         try_these = [(1, 100, 5),
                      (1, 100, 6),
                      (1, 100, 95),
@@ -320,8 +315,8 @@ def theTests(path_to_code_to_check="."):
         # if the binary search is working, show a graph of guess numbers
         if test(test_binary_search(path_to_code_to_check, 1, 10, 5), ""):
             # If you aren't Ben, then show the histogram
-            if os.uname()[1] != "um":  # um is ben's computer
-                vis_binary_search_performance()
+            # if os.uname()[1] != "um":  # um is ben's computer
+            print("binary search works!")
 
     print("{0}/{1} (passed/attempted)".format(sum(testResults),
                                               len(testResults)))

@@ -5,13 +5,12 @@ Modify each function until the tests pass.
 """
 
 
-
-
 def loop_ranger(start, stop=None, step=1):
     """Return a list of numbers between start and stop in steps of step.
 
     Do this using any method apart from just using range()
     """  
+
     return_list = []
     while start < stop:
         return_list.append(start)
@@ -22,7 +21,7 @@ def lone_ranger(start, stop, step):
 
     Look up the docs for range() and wrap it in a 1:1 way
     """
-    return range(start,stop,step)
+    return list(range(start,stop,step))
 
 
 def two_step_ranger(start, stop):
@@ -31,10 +30,9 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    return range(start,stop,2)
+    return list(range(start,stop,2))
 
 
-<<<<<<< HEAD
 def gene_krupa_range(start, stop, even_step, odd_step):
     """Make a range that has two step sizes.
 
@@ -55,8 +53,9 @@ def gene_krupa_range(start, stop, even_step, odd_step):
     return return_list
 
 
-=======
->>>>>>> 1ee65afbaf0336471fde3f39f998dd82842d7ad6
+
+
+
 def stubborn_asker(low, high):
     """Ask for a number between low and high until actually given one.
 
@@ -91,6 +90,8 @@ def not_number_rejector(message):
             return user_response 
         except ValueError:
             print("That's not a number")
+        except TypeError:
+            print("That's not a number!")
 
 def super_asker(low, high):
     """Robust asking function.
@@ -110,6 +111,8 @@ def super_asker(low, high):
                 print("{} is not between {} and {}".format(user_response, low, high))
         except ValueError:
             print("That's not a number")
+        except TypeError:
+            print("That's not a number!")
 
 
 if __name__ == "__main__":
