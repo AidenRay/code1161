@@ -4,6 +4,8 @@
 import json
 import os
 import requests
+import inspect
+import sys
 
 # Handy constants
 LOCAL = os.path.dirname(os.path.realpath(__file__))  # the context of this file
@@ -15,10 +17,8 @@ if LOCAL != CWD:
     print("CWD", CWD)
 
 
-
 def get_some_details():
     """Parse some JSON.
-
     In lazyduck.json is a description of a person from https://randomuser.me/
     Read it in and use the json library to convert it to a dictionary.
     Return a new dictionary that just has the last name, password, and the
@@ -33,18 +33,16 @@ def get_some_details():
          dictionaries.
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
-    data = json.loads(json_data)["results"][0]
-    pstcodeIDSum = int(data["location"]["postcode"]) + int(data["id"]["value"])
-    return {"lastName":       data["name"]["last"],
-            "password":       data["login"]["password"],
-            "postcodePlusID": pstcodeIDSum
-            }
 
+    data = json.loads(json_data)
+    return {"lastName":       None,
+            "password":       None,
+            "postcodePlusID": None
+            }
 
 
 def wordy_pyramid():
     """Make a pyramid out of real words.
-
     There is a random word generator here:
     http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5&minLength=10&maxLength=10&limit=1
     The arguments that the generator takes is the minLength and maxLength of the word
@@ -82,7 +80,6 @@ def wordy_pyramid():
 
 def wunderground():
     """Find the weather station for Sydney.
-
     Get some json from a request parse it and extract values.
     Sign up to https://www.wunderground.com/weather/api/ and get an API key
     TIP: reading json can someimes be a bit confusing. Use a tool like
@@ -109,7 +106,6 @@ def wunderground():
 
 def diarist():
     """Read gcode and find facts about it.
-
     Read in Trispokedovetiles(laser).gcode and count the number of times the
     laser is turned on and off. That's the command "M10 P1".
     Write the answer (a number) to a file called 'lasers.pew' in the week4 directory.
@@ -139,9 +135,12 @@ def diarist():
 
 
 if __name__ == "__main__":
-    print([len(w) for w in wordy_pyramid()])
-    print(get_some_details())
-    print(wunderground())
-    diarist()
+    functions = [obj for name, obj in inspect.getmembers(
+        sys.modules[__name__]) if (inspect.isfunction(obj))]
+    for function in functions:
+        try:
+            print(function())
+        except Exception as e:
+            print(e)
     if not os.path.isfile("lasers.pew"):
         print('diarist did not create lasers.pew')
