@@ -35,9 +35,14 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    lastName = data["results"][0]["name"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcode = data["results"][0]["location"]["postcode"]
+    identity = data["results"][0]["id"]["value"]
+    postcodePlusID = int(postcode) + int(identity)
+    return {"lastName":       lastName,
+            "password":       password,
+            "postcodePlusID": postcodePlusID
             }
 
 
@@ -75,7 +80,23 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &minLength=
     """
-    pass
+    URL = "http://api.wordnik.com/v4/words.json/randomWords?api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"
+    word_pyramid = []
+    for length in range(3,20,2):
+        request_url = URL + "&minLength=" + \
+            str(length) + "&maxLength=" + str(length) + "&limit=1"
+        word = requests.get(request_url)
+        word = word.json()
+        word = word[0]["word"]
+        word_pyramid.append(word)
+    for length in range(20, 2, -2):
+        request_url = URL + "&minLength=" + \
+            str(length) + "&maxLength=" + str(length) + "&limit=1"
+        word = requests.get(request_url)
+        word = word.json()
+        word = word[0]["word"]
+        word_pyramid.append(word)
+    return word_pyramid
 
 
 def wunderground():
@@ -89,7 +110,7 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "aidenkray"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
