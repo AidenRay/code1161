@@ -12,7 +12,6 @@ import threading
 
 class RunCmd(threading.Thread):
     """Run a subprocess command, if it exceeds the timeout kill it.
-
     (without mercy)
     """
 
@@ -56,7 +55,6 @@ class Timeout():
 
 def test(testResult, name):
     """Report on the test.
-
     Returns 1 and 0 so that the 1s can be summed to give a mark.
     """
     if testResult:
@@ -117,7 +115,7 @@ def test_pydocstyle(fileName, flags="-e"):
 def ex_runs(path, exNumber, weekNumber):
     """Check that this exercise runs at all."""
     try:
-        path = "exercise{}.py".format(exNumber)
+        # path = "exercise{}.py".format(exNumber)
         imp.load_source("exercise{}".format(exNumber), path)
         return True
     except Exception as e:
@@ -136,13 +134,10 @@ def syntax_error_message(exNumber, e):
 
 def completion_message(message, width):
     """Print an obvious message.
-
     Example:
     In [5]: completion_message("this is the message", 30)
     ******************************
-
     ✔ this is the message
-
     ******************************
     """
     cap = '{start}{s:{c}^{n}}{end}'.format(n=width, c='*', s="",
@@ -245,7 +240,6 @@ def nyan_cat(block='█'):
 
 def grumpy():
     """Return a grumpy cat.
-
     from: http://textart4u.blogspot.com.au/
                  2013/02/grumpy-cat-meme-ascii-text-art.html
     """
